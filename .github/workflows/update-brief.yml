@@ -27,6 +27,10 @@ jobs:
       - name: Generate brief
         run: python generate_brief.py
         env:
+          IG_API_KEY:           ${{ secrets.IG_API_KEY }}
+          IG_USERNAME:          ${{ secrets.IG_USERNAME }}
+          IG_PASSWORD:          ${{ secrets.IG_PASSWORD }}
+          IG_ACCOUNT_ID:        ${{ secrets.IG_ACCOUNT_ID }}
           OPENAI_API_KEY:       ${{ secrets.OPENAI_API_KEY }}
           TWELVEDATA_API_KEY:   ${{ secrets.TWELVEDATA_API_KEY }}
           FINNHUB_API_KEY:      ${{ secrets.FINNHUB_API_KEY }}
