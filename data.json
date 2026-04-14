@@ -1,8 +1,8 @@
 {
   "date": "Wednesday 15 April 2026",
   "macro": {
-    "badge": "📉 Inflationary Pressures & Geopolitical Tensions",
-    "intro": "<strong>Inflationary pressures</strong> continue with CPI YoY at 330.29, up from 327.46. The <strong>10Y TIPS Real Yield</strong> has slightly decreased to 1.92%, indicating a shift in investor sentiment. The <strong>Fed Funds Rate</strong> remains stable at 3.64%. No major economic events are scheduled today, allowing markets to focus on geopolitical developments."
+    "badge": "📉 Inflationary Pressures, Geopolitical Tensions",
+    "intro": "The macroeconomic environment is characterized by <strong>rising inflation</strong> with CPI YoY at 330.29% and <strong>geopolitical tensions</strong> impacting markets. The <strong>Fed Funds Rate</strong> remains steady at 3.64%, while the <strong>10Y-2Y Yield Spread</strong> has narrowed to 0.5%. No major economic events are scheduled for today, but ongoing Middle East conflicts and US-Iran talks are influencing market sentiment."
   },
   "snapshot": [
     {
@@ -10,21 +10,21 @@
       "value": "1985.50",
       "change": "±0.45% today",
       "dir": "up",
-      "note": "Safe-haven demand amid Middle East tensions"
+      "note": "Safe-haven demand amid geopolitical tensions"
     },
     {
       "name": "WTI Crude Oil",
-      "value": "99.75",
+      "value": "98.75",
       "change": "±-1.25% today",
       "dir": "down",
-      "note": "Below $100 as China defies Hormuz blockade"
+      "note": "Price slides below $100 as China defies US blockade"
     },
     {
       "name": "S&P 500",
-      "value": "4475.30",
+      "value": "4325.67",
       "change": "±1.10% today",
       "dir": "up",
-      "note": "Rally on US-Iran talks optimism"
+      "note": "Rally on optimism over US-Iran talks"
     },
     {
       "name": "EUR/USD",
@@ -35,10 +35,10 @@
     },
     {
       "name": "VIX",
-      "value": "18.75",
-      "change": "±-0.85 today",
+      "value": "18.25",
+      "change": "±-0.75 today",
       "dir": "down",
-      "note": "Risk-on sentiment as equities rally"
+      "note": "Risk-on sentiment as market rallies"
     }
   ],
   "setups": [
@@ -50,42 +50,42 @@
       "name": "Gold Long Setup",
       "conviction": "Moderate–High",
       "conviction_pct": 78,
-      "rationale": "Gold is trading at $1985.50, benefiting from geopolitical tensions in the Middle East. With CPI YoY inflation at 330.29, gold remains a hedge against inflation. The lack of major economic events today supports a focus on geopolitical developments.",
+      "rationale": "Gold is gaining as a safe-haven asset amid Middle East tensions. With CPI YoY inflation at 330.29%, inflationary pressures support higher gold prices. Entry at $1980.00 with a target of $2025.00, considering geopolitical risks.",
       "entry": "1980.00",
-      "entry_note": "Buy on slight pullback",
-      "target": "2020.00",
+      "entry_note": "Buy on dip",
+      "target": "2025.00",
       "target_note": "Resistance from previous highs",
-      "stop": "1960.00",
-      "stop_note": "Support level from recent lows",
+      "stop": "1950.00",
+      "stop_note": "Support at recent low",
       "metrics": [
         {
-          "label": "CPI YoY Inflation",
+          "label": "CPI Inflation",
           "text": "High inflation supports gold as a hedge"
         },
         {
           "label": "Geopolitical Tensions",
-          "text": "Middle East conflict boosts safe-haven demand"
+          "text": "Middle East conflict increases safe-haven demand"
         },
         {
           "label": "Economic event",
-          "text": "No major events today, focus on geopolitical news"
+          "text": "No major events, focus on geopolitical news"
         },
         {
-          "label": "Fear & Greed Index",
-          "text": "Not available, but geopolitical risks imply fear"
+          "label": "10Y TIPS Yield",
+          "text": "Real yields slightly down, supporting gold"
         }
       ],
       "concerns": [
         {
           "label": "Primary risk",
-          "text": "De-escalation in Middle East could lower gold demand"
+          "text": "De-escalation in US-Iran talks could reduce safe-haven demand"
         },
         {
           "label": "Secondary risk",
-          "text": "Unexpected Fed rate hike could strengthen USD"
+          "text": "Stronger USD could pressure gold prices"
         }
       ],
-      "hedge": "Consider shorting USD/JPY if gold declines below $1960."
+      "hedge": "Consider shorting USD/JPY if gold position underperforms."
     },
     {
       "rank": 2,
@@ -95,42 +95,42 @@
       "name": "S&P 500 Short Setup",
       "conviction": "Moderate",
       "conviction_pct": 65,
-      "rationale": "The S&P 500 is at 4475.30, rallying on optimism over US-Iran talks. However, the IMF's growth downgrade for the Middle East and potential for renewed tensions could reverse gains.",
-      "entry": "4500.00",
-      "entry_note": "Short at psychological resistance",
-      "target": "4400.00",
-      "target_note": "Support from recent consolidation",
-      "stop": "4525.00",
-      "stop_note": "Above recent highs",
+      "rationale": "Despite the rally, the S&P 500 faces overbought conditions. The Fear & Greed Index is not available, but sentiment appears overly optimistic. Entry at 4350.00 with a target of 4250.00.",
+      "entry": "4350.00",
+      "entry_note": "Sell on strength",
+      "target": "4250.00",
+      "target_note": "Support at previous consolidation",
+      "stop": "4400.00",
+      "stop_note": "Resistance at recent high",
       "metrics": [
         {
-          "label": "Geopolitical Tensions",
-          "text": "Potential for renewed conflict could impact markets"
+          "label": "RSI",
+          "text": "Potential overbought risk if RSI > 70"
         },
         {
-          "label": "IMF Growth Forecast",
-          "text": "Downgrade for Middle East could weigh on sentiment"
+          "label": "Geopolitical Tensions",
+          "text": "Could reverse optimism quickly"
         },
         {
           "label": "Economic event",
-          "text": "No major events today, focus on geopolitical news"
+          "text": "No events, focus on earnings"
         },
         {
-          "label": "Fear & Greed Index",
-          "text": "Not available, but market optimism may be overdone"
+          "label": "10Y-2Y Yield Spread",
+          "text": "Narrowing spread signals caution"
         }
       ],
       "concerns": [
         {
           "label": "Primary risk",
-          "text": "Successful US-Iran talks could boost equities further"
+          "text": "Continued optimism on US-Iran talks could push index higher"
         },
         {
           "label": "Secondary risk",
-          "text": "Strong earnings reports could support index"
+          "text": "Strong earnings reports could support further gains"
         }
       ],
-      "hedge": "Consider buying VIX calls if S&P 500 rises above 4525."
+      "hedge": "Consider long VIX if S&P 500 short underperforms."
     },
     {
       "rank": 3,
@@ -140,78 +140,78 @@
       "name": "EUR/USD Long Setup",
       "conviction": "Moderate–High",
       "conviction_pct": 72,
-      "rationale": "EUR/USD is trading at 1.0950, with potential to test 1.1000 resistance. The stable Fed Funds Rate at 3.64% and improving Eurozone economic outlook support the euro.",
-      "entry": "1.0930",
-      "entry_note": "Buy on minor dip",
+      "rationale": "EUR/USD is approaching key resistance at 1.1000. With the Fed Funds Rate steady at 3.64% and no major economic events, focus is on technical levels. Entry at 1.0950 with a target of 1.1050.",
+      "entry": "1.0950",
+      "entry_note": "Buy on breakout",
       "target": "1.1050",
-      "target_note": "Next resistance level",
-      "stop": "1.0880",
-      "stop_note": "Below recent support",
+      "target_note": "Resistance at psychological level",
+      "stop": "1.0900",
+      "stop_note": "Support at recent low",
       "metrics": [
         {
-          "label": "Fed Funds Rate",
-          "text": "Stable rate supports euro against USD"
+          "label": "Technical Resistance",
+          "text": "1.1000 is a key level"
         },
         {
-          "label": "Eurozone Outlook",
-          "text": "Improving outlook supports euro"
+          "label": "Fed Funds Rate",
+          "text": "Stable rate supports EUR strength"
         },
         {
           "label": "Economic event",
-          "text": "No major events today, focus on macro trends"
+          "text": "No events, focus on technicals"
         },
         {
-          "label": "Fear & Greed Index",
-          "text": "Not available, but euro strength suggests risk-on"
+          "label": "10Y TIPS Yield",
+          "text": "Slight decline supports EUR"
         }
       ],
       "concerns": [
         {
           "label": "Primary risk",
-          "text": "US economic data surprise could strengthen USD"
+          "text": "USD strength could cap EUR/USD gains"
         },
         {
           "label": "Secondary risk",
           "text": "Geopolitical tensions could increase USD demand"
         }
       ],
-      "hedge": "Consider shorting GBP/USD if EUR/USD falls below 1.0880."
+      "hedge": "Consider short USD/CHF if EUR/USD long underperforms."
     }
   ],
   "contrarian": {
     "symbol": "WTI Crude Oil",
     "dir": "LONG",
-    "entry": "100.00",
-    "stop": "97.00",
+    "entry": "98.00",
+    "stop": "95.00",
     "target": "105.00",
-    "rr": "1:1.67",
-    "body": "WTI Crude Oil has dipped below $100, currently at $99.75, due to geopolitical tensions and China's defiance of the Hormuz blockade. With the IMF warning of adverse scenarios, oil could rebound if tensions escalate.",
-    "warning": "A resolution in the Middle East could lead to a <strong>further decline</strong> in oil prices. Monitor geopolitical developments closely."
+    "rr": "1:2.33",
+    "body": "Despite the current slide below $100, geopolitical tensions and potential supply disruptions could drive prices higher. With the IMF slashing growth forecasts, oil demand may be pressured, but supply risks remain.",
+    "warning": "A rapid de-escalation in the Middle East could lead to a sharp drop in oil prices. <strong>Monitor geopolitical developments closely</strong>."
   },
   "avoid": [
     {
       "symbol": "✈️ Airlines",
-      "reason": "Flight cancellations amid Middle East conflict could impact revenues."
+      "reason": "Flight cancellations amid Middle East conflict increase operational risks."
     },
     {
-      "symbol": "🚛 Trucking",
-      "reason": "Record diesel spending due to Middle East tensions increases operational costs."
+      "symbol": "🚛 US Trucking",
+      "reason": "Record diesel spending due to conflict impacts profitability."
     },
     {
-      "symbol": "🏦 Banks",
-      "reason": "Potential for increased volatility due to geopolitical tensions."
+      "symbol": "🏦 UK Financials",
+      "reason": "IMF growth downgrade due to Iran war fuels inflation concerns."
     },
     {
-      "symbol": "🏗️ Construction",
-      "reason": "IMF growth downgrade could impact sector outlook."
-    },
-    {
-      "symbol": "🛢️ Oil Services",
-      "reason": "Uncertainty in oil prices due to geopolitical developments."
+      "symbol": "🛢️ Gulf Oil",
+      "reason": "IMF slashes growth forecast for Middle East, impacting oil exporters."
     },
     {
       "symbol": "📉 Emerging Markets",
-      "reason": "IMF warns of adverse scenarios affecting growth outlook."
+      "reason": "IMF warns of adverse scenarios, increasing risk."
+    },
+    {
+      "symbol": "🛫 Lufthansa",
+      "reason": "Strikes lead to operational shutdowns, impacting revenue."
     }
   ]
 }
