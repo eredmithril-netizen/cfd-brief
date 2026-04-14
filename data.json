@@ -1,0 +1,88 @@
+{
+  "date": "Tuesday 14 April 2026",
+  "macro": {
+    "badge": "🕊 Macro Shift — Fragile US-Iran Ceasefire · Day 6 · Talks Active in Islamabad",
+    "intro": "The macro regime has flipped from <strong>risk-off to risk-on</strong>: a two-week US-Iran ceasefire brokered by Pakistan (April 8) reopened the Strait of Hormuz and sent WTI crude crashing <strong>17% from its $115 peak to $97.45</strong>. Equities surged, gold pulled back, and the safe-haven dollar softened. Today's three setups exploit this ceasefire relief rally — but the arrangement is <strong>described by analysts as a \"pause, not a resolution.\"</strong> Negotiations in Islamabad remain fragile. Any breakdown headline triggers violent reversals in all three positions. Monitor news feeds continuously. The edge today is riding the relief, not overstaying it."
+  },
+  "snapshot": [
+    { "name": "Gold (XAU/USD)", "value": "$4,748", "change": "+0.33% today", "dir": "up", "note": "Range: $4,701 – $4,761" },
+    { "name": "WTI Crude Oil",  "value": "$97.45", "change": "−1.64% today · −17% from peak", "dir": "down", "note": "Ceasefire supply relief ongoing" },
+    { "name": "S&P 500 Futures","value": "+1.2%", "change": "Risk-on across Asia & Europe", "dir": "up",  "note": "Ceasefire relief rally" },
+    { "name": "EUR/USD",        "value": "~1.1870","change": "USD safe-haven bid fading", "dir": "up",  "note": "Oil drop = EU energy cost relief" },
+    { "name": "Ceasefire Status","value":"HOLDING","change": "Day 6 of 14-day truce",      "dir": "up",  "note": "Islamabad talks in progress" }
+  ],
+  "setups": [
+    {
+      "rank": 1, "dir": "LONG", "type": "Index", "symbol": "US500 / SPX",
+      "name": "S&P 500 CFD — Long (Ceasefire Rally)", "conviction": "High", "conviction_pct": 82,
+      "rationale": "The ceasefire removed the single largest overhang on equities: a $115 crude oil supply shock. With WTI crashing 17% from peak, energy cost pressures on S&P constituents are easing rapidly. Asian markets advanced on the news, European futures are bid, and US pre-market is tracking higher. The relief rally has further to run intraday — the first U.S. open will set the tone for the week.",
+      "entry": "Buy open dip", "entry_note": "First 15-min pullback after open",
+      "target": "+1.8%",        "target_note": "Intraday extension target",
+      "stop":   "−0.7%",        "stop_note":   "Below session open low",
+      "metrics": [
+        { "label": "VIX level", "text": "below 18 confirms risk-on is intact — above 22 means fear is creeping back, tighten stop immediately." },
+        { "label": "WTI Crude direction", "text": "if oil reverses back above $100, the "energy crisis is over" thesis evaporates — close the long." },
+        { "label": "US bank earnings (Q1 2026)", "text": "JPMorgan, Goldman, Citi reporting this week. Positive surprises extend the rally; negative surprises cap it." },
+        { "label": "Islamabad ceasefire headlines", "text": "any "talks breakdown" news flash triggers an immediate reversal — keep a live news feed open at all times." }
+      ],
+      "concerns": [
+        { "label": "Ceasefire is "a pause, not a resolution"", "text": "analysts across CNBC, IG, and Charles Schwab all describe this as fragile. A single Iran provocation headline could reverse a week of gains in minutes." },
+        { "label": "Market may have already priced in the ceasefire", "text": "indices surged on April 8 when the news broke. Today's entry is 6 days later — you may be buying into an already-extended move. Manage size accordingly." }
+      ],
+      "hedge": "If US500 drops more than 1.2% from your entry and closes below the session open, open an equal-size short to neutralise exposure and top up margin immediately."
+    },
+    {
+      "rank": 2, "dir": "LONG", "type": "FX Pair", "symbol": "EUR/USD",
+      "name": "Euro / US Dollar CFD — Long (Energy Relief)", "conviction": "High", "conviction_pct": 74,
+      "rationale": "The eurozone was the biggest victim of the Hormuz oil spike — Europe imports 85% of its crude. As oil craters 17% from peak, the "European energy crisis discount" on the euro is unwinding sharply. Simultaneously, the USD safe-haven bid that accumulated during the blockade weeks is fading as risk appetite returns. This creates a double tailwind for EUR/USD: euro relief + dollar softening, both from the same catalyst.",
+      "entry": "1.1840–1.1870", "entry_note": "Buy the London open dip",
+      "target": "1.1960",         "target_note": "Next resistance cluster",
+      "stop":   "1.1780",         "stop_note":   "Below Asian session low",
+      "metrics": [
+        { "label": "DXY (US Dollar Index)", "text": "DXY below 100.5 is bullish for EUR/USD — above 102 means dollar demand returning, close or tighten the long." },
+        { "label": "WTI Crude direction", "text": "EUR/USD rally is directly linked to oil falling. If crude reverses above $100, close this position immediately." },
+        { "label": "ECB / Fed speaker calendar", "text": "hawkish Fed comments strengthen USD and compress this pair. Check today's speaker schedule before entering." },
+        { "label": "RSI on 1H chart", "text": "stay long while RSI holds above 50. A drop below 45 signals momentum has shifted — tighten stop." }
+      ],
+      "concerns": [
+        { "label": "Ceasefire breakdown = instant USD safe-haven bid", "text": "if the Islamabad talks collapse, global investors flood back into dollars as the ultimate safe haven — this EUR/USD long reverses violently and rapidly." },
+        { "label": "European diesel shortage risk persists", "text": "even with crude lower, Europe's refining capacity constraints mean diesel prices may remain elevated. Watch for ECB concern about inflation staying sticky despite lower oil." }
+      ],
+      "hedge": "If EUR/USD breaks below 1.1780 on the hourly with conviction, open an equal-size short to neutralise the long and top up margin immediately."
+    },
+    {
+      "rank": 3, "dir": "LONG", "type": "Gold", "symbol": "XAU/USD",
+      "name": "Gold Spot CFD — Long on Dip to Support", "conviction": "Moderate–High", "conviction_pct": 67,
+      "rationale": "Gold is rebounding +0.33% to $4,748 today after yesterday's pullback — as the US and Iran signalled willingness to resume negotiations. The ceasefire is a headwind on gold's safe-haven premium, but it does NOT resolve the underlying inflationary damage: six weeks of $100+ crude oil is already embedded in supply chains. Gold's structural floor is supported by (1) central bank buying, (2) pipeline inflation from the blockade weeks, and (3) the ceasefire's own fragility.",
+      "entry": "$4,701–$4,720", "entry_note": "Buy the intraday support dip",
+      "target": "$4,820",         "target_note": "Top of current weekly range",
+      "stop":   "$4,655",         "stop_note":   "Below structural support",
+      "metrics": [
+        { "label": "$4,700 support", "text": "this key level must hold on any pullback — a clean break below with high volume is your stop trigger. Do not second-guess it." },
+        { "label": "Real yield (10Y TIPS)", "text": "if real yields spike on hawkish Fed commentary, gold loses its inflation hedge appeal quickly. Monitor TIPS yield vs gold price correlation." },
+        { "label": "DXY vs Gold", "text": "gold and dollar move inversely in this environment. DXY above 102 is your clearest exit warning." },
+        { "label": "Lasting peace deal risk", "text": "a full permanent peace treaty (not just a ceasefire) would collapse gold's geopolitical premium. Monitor Islamabad talks closely for escalation or de-escalation signals." }
+      ],
+      "concerns": [
+        { "label": "Ceasefire = structural gold headwind", "text": "the longer the ceasefire holds, the more geopolitical premium bleeds out of gold. If talks result in a formal peace deal, expect a sharp $200–$400 drawdown from current levels." },
+        { "label": "Parabolic run risk", "text": "gold is up 46% year-over-year. At $4,748/oz, late buyers are exposed to mean-reversion. The dip-entry approach manages this, but know you are in a historically elevated market." }
+      ],
+      "hedge": "If gold breaks below $4,655 with conviction on the hourly close, open an equal-size short to freeze the loss, then reassess with the macro context."
+    }
+  ],
+  "contrarian": {
+    "symbol": "USOIL / WTI Crude",
+    "dir": "SHORT",
+    "entry": "$97.45", "stop": "$102.50", "target": "$88.00", "rr": "1:2.5",
+    "body": "WTI crude is trading at $97.45 — still elevated despite crashing 17% from its $115 peak. If the two-week ceasefire holds through April 22, supply-chain fears continue to abate and the "risk premium" embedded in oil bleeds out further, targeting a move toward $85–$88/barrel (pre-crisis levels). The fundamental case for lower oil is strong: Hormuz is reopened, Iranian exports resuming, and global demand destruction from 6 weeks of $100+ crude is a real headwind.",
+    "warning": "This is the riskiest trade on the board. If the ceasefire collapses today, oil can spike $10–$15 per barrel in under an hour. You are short a binary geopolitical event. Suitable <strong>only for experienced CFD traders</strong> with strict stops, adequate margin, and real-time news monitoring capability."
+  },
+  "avoid": [
+    { "symbol": "🛢️ USOIL LONG", "reason": "The long oil thesis died the moment the ceasefire was announced on April 8. Supply is returning. Going long crude today means betting on a ceasefire breakdown — that is a valid geopolitical bet, not a systematic trade. If you want ceasefire breakdown exposure, use a direct VIX position or a gold add-on, not an USOIL long. Avoid entirely as a primary position." },
+    { "symbol": "🏭 Palladium CFD (XPD)", "reason": "Palladium faces two competing forces that cancel each other out: (1) ceasefire = risk-on = auto sector recovery = bullish for palladium; (2) six weeks of $100+ oil has already triggered recession fears that reduce auto demand = bearish. No clear directional edge. The spread is also wide on palladium CFDs. Avoid entirely." },
+    { "symbol": "☕ Coffee CFD (KC)", "reason": "Coffee prices today are moving on unrelated Brazilian harvest dynamics and weather forecasts in the Minas Gerais region — completely disconnected from the Hormuz ceasefire macro thesis. Trading coffee today means operating without an edge in a foreign narrative. Avoid entirely." },
+    { "symbol": "🇩🇪 DAX 40 CFD (GER40)", "reason": "The DAX has already rallied sharply on the ceasefire news since April 8 — buying it today means chasing a move that is 6 days old and running into Q1 2026 earnings risk. The S&P 500 long is the cleaner, more liquid version of the "equities risk-on" trade. Do not duplicate with DAX." },
+    { "symbol": "📦 Any new positions after 14:00 EST", "reason": "The Islamabad ceasefire talks are ongoing — geopolitical headlines can break at any moment during the U.S. afternoon session. After 14:00 EST, you are trading noise around fragile diplomacy, not signal. Late-session entries on geopolitically sensitive days have poor risk/reward." },
+    { "symbol": "💴 USD/JPY Short (Long JPY)", "reason": "The Japanese yen's safe-haven premium is being unwound as risk-on returns — going long JPY (short USD/JPY) is fighting the ceasefire tailwind. At the same time, the BOJ's policy stance remains uncertain. No edge in either direction. Avoid entirely." }
+  ]
+}

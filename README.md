@@ -1,29 +1,64 @@
-# cfd-brief
+# CFD Intraday Brief — Multi-Source Auto-Generator v2
 
-A personal web application for identifying and generating intraday CFD (Contract for Difference) trading opportunities.
+Plně automatický systém generující CFD Intraday Brief **3× denně** z reálných dat.
 
-## About
+## Architektura
 
-**cfd-brief** is a web app designed to help spot and generate intraday CFD trading opportunities. It analyses market conditions during the trading day and surfaces potential setups to act on. It is a personal project built and maintained solely by the author.
+```
+Cenová data  ──► Twelve Data → Finnhub → AlphaVantage → Polygon → FMP  (fallback chain)
+Makrodata    ──► FRED API (CPI, TIPS, M2, Fed Funds, yield curve)
+Zprávy       ──► Finnhub + NewsAPI + Alpha Vantage News + Benzinga RSS + RSS záloha
+Indikátory   ──► Alpha Vantage (RSI 14 pro S&P a Gold)
+Doplňky      ──► CNN Fear & Greed + FMP Economic Calendar
+                         │
+                    GPT-4o analýza
+                         │
+                      data.json  ◄──  index.html čte při každém načtení stránky
+```
 
-## Features
+## API klíče — kde získat (vše ZDARMA)
 
-- Generate intraday CFD trading opportunities
-- Analyse market conditions in real time
-- Surface potential trade setups throughout the trading day
+| Klíč (GitHub Secret) | Kde získat | Free limit |
+|---|---|---|
+| `OPENAI_API_KEY` | platform.openai.com | ~$5 = 2+ měsíce |
+| `TWELVEDATA_API_KEY` | twelvedata.com | **800 req/den** |
+| `FINNHUB_API_KEY` | finnhub.io | 60 req/min |
+| `ALPHAVANTAGE_API_KEY` | alphavantage.co | 25 req/den |
+| `POLYGON_API_KEY` | polygon.io | 5 req/min |
+| `FMP_API_KEY` | financialmodelingprep.com | 250 req/den |
+| `FRED_API_KEY` | fred.stlouisfed.org/docs/api | Neomezený |
+| `NEWSAPI_KEY` | newsapi.org | 100 req/den |
 
-## Usage
+> **Minimum pro spuštění:** `OPENAI_API_KEY` + `TWELVEDATA_API_KEY`.
+> Ostatní klíče přidávají další vrstvu dat a zálohu — skript funguje i bez nich.
 
-This project is intended for personal use only. To run it locally, open the project files in your browser or follow the setup steps specific to the technology used.
+## Rychlé nastavení (10 minut)
 
-## License
+1. **GitHub repozitář** — nahrajte všechny soubory do nového repo
+2. **Secrets** — Settings → Secrets → Actions → přidejte každý klíč
+3. **GitHub Pages** — Settings → Pages → Branch: main → root
+4. **Hotovo** — web běží na `https://vasejmeno.github.io/nazev-repo/`
 
-This project is proprietary software. All rights reserved by **Václav Krýsa**.  
-See the [LICENSE](./LICENSE.md) file for full terms.
+## Soubory
 
-> Unauthorized use, copying, modification, or distribution of this project is strictly prohibited.
+```
+/
+├── index.html              ← HTML šablona (nikdy neměnit)
+├── data.json               ← Automaticky přepisováno 3× denně
+├── generate_brief.py       ← Python skript
+├── requirements.txt        ← Závislosti
+└── .github/workflows/
+    └── update-brief.yml    ← GitHub Actions plán
+```
 
-## Author
+## Měsíční náklady
 
-**Václav Krýsa**  
-All inquiries regarding this project should be directed to the author.
+| Zdroj | Cena |
+|---|---|
+| GitHub Actions + Pages | Zdarma |
+| Twelve Data, Finnhub, AV, Polygon, FMP, FRED, NewsAPI | Zdarma |
+| OpenAI GPT-4o (66 běhů × ~4500 tokenů) | ~$1–2/měsíc |
+
+## Ruční aktualizace
+
+GitHub → **Actions** → **Update CFD Intraday Brief** → **Run workflow**

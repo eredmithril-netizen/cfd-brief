@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFD Intraday Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ─────────────────────────────────────────── */
+:root,[data-theme="light"]{
+  --bg:#f7f6f2;--surface:#ffffff;--surface-2:#f3f0ec;--border:#dcd9d5;
+  --text:#1a1917;--muted:#6b6a66;--faint:#b0afab;
+  --green:#1d7a3e;--green-bg:#e8f5ee;
+  --red:#a12c2c;--red-bg:#faeaea;
+  --gold:#b07a00;--gold-bg:#fdf6e3;
+  --blue:#006494;--blue-bg:#e6f3fa;
+  --accent:#01696f;--accent-light:#cedcd8;
+  --shadow:0 1px 3px rgba(0,0,0,.07),0 4px 16px rgba(0,0,0,.05);
+  --radius:8px; --radius-lg:14px;
+  --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  --text-xs:clamp(.75rem,.7rem + .25vw,.875rem);
+  --text-sm:clamp(.875rem,.8rem + .35vw,1rem);
+  --text-base:clamp(1rem,.95rem + .25vw,1.125rem);
+  --text-lg:clamp(1.125rem,1rem + .75vw,1.5rem);
+  --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+}
+[data-theme="dark"]{
+  --bg:#111110;--surface:#1c1b19;--surface-2:#242320;--border:#2e2d2a;
+  --text:#d4d3d0;--muted:#7a7976;--faint:#4a4946;
+  --green:#4ead6a;--green-bg:#1a2e20;
+  --red:#d46060;--red-bg:#2a1a1a;
+  --gold:#e8af34;--gold-bg:#28220e;
+  --blue:#5591c7;--blue-bg:#122030;
+  --accent:#4f98a3;--accent-light:#1e3b3d;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.35);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme]){
+  --bg:#111110;--surface:#1c1b19;--surface-2:#242320;--border:#2e2d2a;
+  --text:#d4d3d0;--muted:#7a7976;--faint:#4a4946;
+  --green:#4ead6a;--green-bg:#1a2e20;
+  --red:#d46060;--red-bg:#2a1a1a;
+  --gold:#e8af34;--gold-bg:#28220e;
+  --blue:#5591c7;--blue-bg:#122030;
+  --accent:#4f98a3;--accent-light:#1e3b3d;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.35);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;scroll-behavior:smooth}
+body{font-family:var(--font-body);font-size:var(--text-base);color:var(--text);background:var(--bg);min-height:100dvh;line-height:1.6;padding-bottom:60px}
+img,svg{display:block}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.2}
+p,li{text-wrap:pretty;max-width:72ch}
+/* ── LAYOUT ─── */
+.container{max-width:980px;margin-inline:auto;padding-inline:clamp(1rem,3vw,2rem)}
+/* ── HEADER ─── */
+header{border-bottom:1px solid var(--border);padding:1rem 0;position:sticky;top:0;background:var(--bg);z-index:100;backdrop-filter:blur(8px)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:var(--text-sm);letter-spacing:.02em;color:var(--text);text-decoration:none}
+.header-actions{display:flex;align-items:center;gap:.5rem}
+/* ── BUTTONS ─── */
+.btn{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-body);font-size:var(--text-xs);font-weight:500;padding:.45rem .9rem;border-radius:6px;border:1px solid transparent;cursor:pointer;transition:all .18s ease;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-primary:hover{opacity:.88}
+.btn-ghost{background:transparent;color:var(--muted);border-color:var(--border)}
+.btn-ghost:hover{background:var(--surface-2);color:var(--text)}
+.btn-edit{background:var(--gold-bg);color:var(--gold);border-color:color-mix(in oklch,var(--gold) 30%,transparent)}
+.btn-edit:hover{opacity:.88}
+/* ── RISK BANNER ─── */
+.risk-banner{background:var(--red-bg);border-bottom:1px solid color-mix(in oklch,var(--red) 25%,transparent);padding:.55rem 0;font-size:var(--text-xs);color:var(--red);text-align:center;font-weight:500;letter-spacing:.01em}
+/* ── MACRO CARD ─── */
+.macro-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:clamp(1.25rem,3vw,2rem);margin-top:1.5rem;box-shadow:var(--shadow)}
+.macro-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:var(--text-xs);font-weight:600;color:var(--accent);background:var(--accent-light);padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem}
+/* ── SNAPSHOT GRID ─── */
+.snapshot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(170px,100%),1fr));gap:.75rem;margin-top:1.5rem}
+.snap-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;box-shadow:var(--shadow)}
+.snap-name{font-size:var(--text-xs);color:var(--muted);font-weight:500;margin-bottom:.35rem}
+.snap-value{font-family:var(--font-mono);font-size:var(--text-lg);font-weight:600;color:var(--text);line-height:1.2}
+.snap-change{font-size:var(--text-xs);margin-top:.25rem;font-weight:500}
+.snap-note{font-size:var(--text-xs);color:var(--faint);margin-top:.2rem}
+.dir-up{color:var(--green)}.dir-down{color:var(--red)}
+/* ── SECTION HEADER ─── */
+.section-header{display:flex;align-items:baseline;gap:.75rem;margin:2.5rem 0 1.25rem}
+.section-title{font-size:var(--text-lg);font-weight:700;color:var(--text)}
+.section-sub{font-size:var(--text-xs);color:var(--muted)}
+/* ── SETUP CARD ─── */
+.setup-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:clamp(1.25rem,3vw,1.75rem);margin-bottom:1.25rem;box-shadow:var(--shadow)}
+.setup-head{display:flex;flex-wrap:wrap;align-items:flex-start;gap:.75rem;margin-bottom:1.25rem}
+.setup-rank{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-weight:700;font-size:var(--text-sm);background:var(--accent-light);color:var(--accent);flex-shrink:0}
+.setup-meta{flex:1;min-width:0}
+.setup-badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.4rem}
+.badge{display:inline-flex;align-items:center;font-size:var(--text-xs);font-weight:600;padding:.2rem .6rem;border-radius:4px;letter-spacing:.04em;text-transform:uppercase}
+.badge-long{background:var(--green-bg);color:var(--green)}
+.badge-short{background:var(--red-bg);color:var(--red)}
+.badge-type{background:var(--surface-2);color:var(--muted)}
+.badge-conviction-high{background:var(--green-bg);color:var(--green)}
+.badge-conviction-moderate{background:var(--gold-bg);color:var(--gold)}
+.setup-symbol{font-size:var(--text-sm);font-weight:700;color:var(--text);font-family:var(--font-mono)}
+.setup-name{font-size:var(--text-xs);color:var(--muted);margin-top:.15rem}
+/* conviction bar */
+.conviction-wrap{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:.35rem;flex-shrink:0}
+.conviction-label{font-size:var(--text-xs);color:var(--muted)}
+.conviction-bar{width:100px;height:6px;border-radius:3px;background:var(--border);overflow:hidden}
+.conviction-fill{height:100%;border-radius:3px;background:var(--accent);transition:width .4s ease}
+.conviction-pct{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--accent);font-weight:700}
+/* ETL grid */
+.etl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1rem 0}
+.etl-cell{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:.8rem 1rem}
+.etl-label{font-size:var(--text-xs);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.etl-value{font-family:var(--font-mono);font-size:var(--text-sm);font-weight:700;color:var(--text);margin:.2rem 0}
+.etl-note{font-size:var(--text-xs);color:var(--faint)}
+/* metrics list */
+.metrics-list{margin:1rem 0;display:flex;flex-direction:column;gap:.5rem}
+.metric-item{font-size:var(--text-sm);color:var(--muted);padding:.5rem .85rem;background:var(--surface-2);border-radius:6px;border-left:2px solid var(--accent)}
+.metric-label{font-weight:600;color:var(--text)}
+/* concerns */
+.concerns-list{margin:.75rem 0;display:flex;flex-direction:column;gap:.5rem}
+.concern-item{font-size:var(--text-sm);color:var(--muted);padding:.5rem .85rem;background:var(--red-bg);border-radius:6px;border-left:2px solid var(--red)}
+.concern-label{font-weight:600;color:var(--red)}
+/* hedge */
+.hedge-box{margin-top:.75rem;padding:.75rem 1rem;background:var(--gold-bg);border:1px solid color-mix(in oklch,var(--gold) 20%,transparent);border-radius:var(--radius);font-size:var(--text-xs);color:var(--gold)}
+.hedge-box strong{color:var(--gold);font-weight:700}
+/* ── CONVICTION RANKING ─── */
+.ranking-grid{display:flex;flex-direction:column;gap:.6rem}
+.rank-row{display:flex;align-items:center;gap:1rem;padding:.9rem 1.1rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+.rank-num{font-family:var(--font-mono);font-weight:700;font-size:var(--text-lg);color:var(--faint);min-width:32px}
+.rank-info{flex:1;min-width:0}
+.rank-symbol{font-family:var(--font-mono);font-size:var(--text-sm);font-weight:700;color:var(--text)}
+.rank-name{font-size:var(--text-xs);color:var(--muted)}
+.rank-bar-wrap{width:140px;flex-shrink:0}
+.rank-bar-bg{height:6px;border-radius:3px;background:var(--border);overflow:hidden}
+.rank-bar-fill{height:100%;border-radius:3px;background:var(--accent)}
+.rank-pct{font-family:var(--font-mono);font-size:var(--text-xs);font-weight:700;color:var(--accent);text-align:right;margin-top:.2rem}
+/* ── CONTRARIAN ─── */
+.contrarian-card{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow)}
+.contrarian-head{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1rem}
+.contrarian-levels{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:1rem 0}
+.cl-cell{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:.6rem .8rem;text-align:center}
+.cl-label{font-size:var(--text-xs);color:var(--muted);font-weight:600}
+.cl-value{font-family:var(--font-mono);font-size:var(--text-sm);font-weight:700;color:var(--text)}
+/* ── AVOID ─── */
+.avoid-list{display:flex;flex-direction:column;gap:.6rem}
+.avoid-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem;box-shadow:var(--shadow)}
+.avoid-symbol{font-family:var(--font-mono);font-size:var(--text-sm);font-weight:700;color:var(--red);margin-bottom:.3rem}
+.avoid-reason{font-size:var(--text-sm);color:var(--muted)}
+/* ── FOOTER ─── */
+footer{margin-top:3rem;padding:1.5rem 0;border-top:1px solid var(--border);font-size:var(--text-xs);color:var(--faint);text-align:center}
+/* ── EDIT MODAL ─── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;display:none;align-items:flex-start;justify-content:center;padding:1rem;overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);width:100%;max-width:720px;margin:auto;box-shadow:0 20px 60px rgba(0,0,0,.5);overflow:hidden}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:1}
+.modal-title{font-size:var(--text-base);font-weight:700;color:var(--text)}
+.modal-body{padding:1.5rem;max-height:75vh;overflow-y:auto;display:flex;flex-direction:column;gap:1.25rem}
+.modal-footer{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;gap:.75rem;justify-content:flex-end;flex-wrap:wrap}
+.field-group{display:flex;flex-direction:column;gap:.35rem}
+.field-group label{font-size:var(--text-xs);font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.field-group input,.field-group textarea,.field-group select{font-family:var(--font-body);font-size:var(--text-sm);color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:.5rem .8rem;width:100%;outline:none;transition:border-color .18s}
+.field-group input:focus,.field-group textarea:focus{border-color:var(--accent)}
+.field-group textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.form-section-title{font-size:var(--text-sm);font-weight:700;color:var(--text);padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.75rem}
+.tab-btn{padding:.35rem .75rem;border-radius:6px;font-size:var(--text-xs);font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface-2);color:var(--muted);transition:all .18s}
+.tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tab-panel{display:none}.tab-panel.active{display:flex;flex-direction:column;gap:1rem}
+/* ── LOADING ─── */
+.loading{display:flex;align-items:center;justify-content:center;min-height:50vh;flex-direction:column;gap:1rem;color:var(--muted);font-size:var(--text-sm)}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* ── RESPONSIVE ─── */
+@media(max-width:600px){
+  .etl-grid{grid-template-columns:1fr 1fr}
+  .contrarian-levels{grid-template-columns:1fr 1fr}
+  .conviction-wrap{display:none}
+  .form-row{grid-template-columns:1fr}
+  .rank-bar-wrap{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- RISK BANNER -->
+<div class="risk-banner">
+  ⚠ HIGH RISK INSTRUMENT — CFDs are leveraged derivatives. Losses can exceed your initial deposit. This brief is for informational purposes only and does not constitute personal financial advice.
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <a class="logo" href="#">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-label="CFD Brief logo">
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+        </svg>
+        <span>CFD Intraday Brief</span>
+      </a>
+      <div class="header-actions">
+        <span id="dateLabel" style="font-size:var(--text-xs);color:var(--muted)"></span>
+        <button class="btn btn-edit" onclick="openEdit()">✏️ Edit</button>
+        <button class="btn btn-ghost" data-theme-toggle aria-label="Toggle theme">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="container">
+  <div id="app"><div class="loading"><div class="spinner"></div><p>Načítám data...</p></div></div>
+</main>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">✏️ Upravit dnešní brief</span>
+      <button class="btn btn-ghost" onclick="closeEdit()" style="padding:.3rem .6rem">✕</button>
+    </div>
+    <div class="modal-body" id="editBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeEdit()">Zrušit</button>
+      <button class="btn btn-primary" onclick="downloadJSON()">⬇ Stáhnout data.json</button>
+      <button class="btn btn-primary" onclick="applyEdits()">✓ Zobrazit změny</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>CFD Intraday Brief — generováno pro informační účely. Není finančním poradou. | Pro aktualizaci upravte soubor <strong>data.json</strong> a nahrajte ho na server.</p>
+  </div>
+</footer>
+
+<script>
+// ── THEME TOGGLE ──────────────────────────────────────
+(function(){
+  const btn=document.querySelector('[data-theme-toggle]');
+  const root=document.documentElement;
+  let dark=root.getAttribute('data-theme')==='dark'||(root.getAttribute('data-theme')==null&&matchMedia('(prefers-color-scheme:dark)').matches);
+  function setTheme(d){
+    dark=d; root.setAttribute('data-theme',d?'dark':'light');
+    if(btn) btn.innerHTML=d
+      ?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+      :'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+  setTheme(dark);
+  if(btn) btn.addEventListener('click',()=>setTheme(!dark));
+})();
+
+// ── DATA + RENDER ────────────────────────────────────
+let DATA={};
+
+async function loadData(){
+  try{
+    const r=await fetch('./data.json?_='+Date.now());
+    if(!r.ok) throw new Error('not found');
+    DATA=await r.json();
+  }catch(e){
+    // Fallback: show message if no data.json found
+    document.getElementById('app').innerHTML=`
+      <div style="text-align:center;padding:3rem 1rem;color:var(--muted)">
+        <p style="font-size:var(--text-lg);font-weight:700;color:var(--red);margin-bottom:.75rem">⚠ Soubor data.json nenalezen</p>
+        <p>Umístěte soubor <strong>data.json</strong> do stejné složky jako tento HTML soubor.</p>
+        <p style="margin-top:.5rem;font-size:var(--text-xs)">Nebo použijte tlačítko <strong>Edit</strong> v záhlaví, vytvořte data a stáhněte data.json.</p>
+        <button class="btn btn-edit" style="margin-top:1.5rem" onclick="openEdit()">✏️ Vytvořit data.json</button>
+      </div>`;
+    return;
+  }
+  render();
+}
+
+function render(){
+  const d=DATA;
+  document.getElementById('dateLabel').textContent=d.date||'';
+
+  const convClass=c=>{
+    const cl=c.toLowerCase();
+    if(cl.includes('high')||cl.includes('high')) return 'badge-conviction-high';
+    return 'badge-conviction-moderate';
+  };
+  const dirBadge=dir=>`<span class="badge badge-${dir.toLowerCase()}">${dir}</span>`;
+  const snapArrow=dir=>dir==='up'?'▲':'▼';
+
+  const snapshotHTML=d.snapshot.map(s=>`
+    <div class="snap-card">
+      <div class="snap-name">${s.name}</div>
+      <div class="snap-value">${s.value}</div>
+      <div class="snap-change dir-${s.dir}">${snapArrow(s.dir)} ${s.change}</div>
+      <div class="snap-note">${s.note}</div>
+    </div>`).join('');
+
+  const setupsHTML=d.setups.map(s=>`
+    <div class="setup-card">
+      <div class="setup-head">
+        <div class="setup-rank">${s.rank}</div>
+        <div class="setup-meta">
+          <div class="setup-badges">
+            ${dirBadge(s.dir)}
+            <span class="badge badge-type">${s.type}</span>
+            <span class="badge ${convClass(s.conviction)}">Conviction: ${s.conviction}</span>
+          </div>
+          <div class="setup-symbol">⭐ ${s.symbol}</div>
+          <div class="setup-name">${s.name}</div>
+        </div>
+        <div class="conviction-wrap">
+          <span class="conviction-label">Conviction</span>
+          <div class="conviction-bar"><div class="conviction-fill" style="width:${s.conviction_pct}%"></div></div>
+          <span class="conviction-pct">${s.conviction_pct}%</span>
+        </div>
+      </div>
+      <p style="font-size:var(--text-sm);color:var(--muted);margin-bottom:1rem">${s.rationale}</p>
+      <div class="etl-grid">
+        <div class="etl-cell"><div class="etl-label">Entry Zone</div><div class="etl-value">${s.entry}</div><div class="etl-note">${s.entry_note}</div></div>
+        <div class="etl-cell"><div class="etl-label">Take Profit</div><div class="etl-value" style="color:var(--green)">${s.target}</div><div class="etl-note">${s.target_note}</div></div>
+        <div class="etl-cell"><div class="etl-label">Stop Loss</div><div class="etl-value" style="color:var(--red)">${s.stop}</div><div class="etl-note">${s.stop_note}</div></div>
+      </div>
+      <p style="font-size:var(--text-xs);font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin:.75rem 0 .4rem">Key Metrics</p>
+      <div class="metrics-list">${s.metrics.map(m=>`<div class="metric-item"><span class="metric-label">${m.label}: </span>${m.text}</div>`).join('')}</div>
+      <p style="font-size:var(--text-xs);font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.07em;margin:.75rem 0 .4rem">⚠ Concerns</p>
+      <div class="concerns-list">${s.concerns.map(c=>`<div class="concern-item"><span class="concern-label">${c.label}: </span>${c.text}</div>`).join('')}</div>
+      <div class="hedge-box"><strong>🛡 Hedge:</strong> ${s.hedge}</div>
+    </div>`).join('');
+
+  const rankingHTML=d.setups.map(s=>`
+    <div class="rank-row">
+      <div class="rank-num">0${s.rank}</div>
+      <div class="rank-info">
+        <div class="rank-symbol">${s.symbol} ${dirBadge(s.dir)}</div>
+        <div class="rank-name">${s.name}</div>
+      </div>
+      <div class="rank-bar-wrap">
+        <div class="rank-bar-bg"><div class="rank-bar-fill" style="width:${s.conviction_pct}%"></div></div>
+        <div class="rank-pct">${s.conviction_pct}%</div>
+      </div>
+    </div>`).join('');
+
+  const ct=d.contrarian;
+  const contrHTML=`
+    <div class="contrarian-card">
+      <div class="contrarian-head">
+        <span class="badge" style="background:var(--gold-bg);color:var(--gold)">⬡ Contrarian</span>
+        <span class="badge badge-short">SHORT</span>
+        <span class="badge badge-type">Commodity</span>
+        <span style="font-family:var(--font-mono);font-weight:700;font-size:var(--text-sm)">${ct.symbol}</span>
+      </div>
+      <p style="font-size:var(--text-sm);color:var(--muted);margin-bottom:.75rem">${ct.body}</p>
+      <div class="contrarian-levels">
+        <div class="cl-cell"><div class="cl-label">Entry</div><div class="cl-value">${ct.entry}</div></div>
+        <div class="cl-cell"><div class="cl-label">Stop</div><div class="cl-value" style="color:var(--red)">${ct.stop}</div></div>
+        <div class="cl-cell"><div class="cl-label">Target</div><div class="cl-value" style="color:var(--green)">${ct.target}</div></div>
+      </div>
+      <div class="concern-item" style="margin-top:.75rem"><strong style="color:var(--red)">Proč contrarian? </strong>${ct.warning}</div>
+    </div>`;
+
+  const avoidHTML=d.avoid.map(a=>`
+    <div class="avoid-item">
+      <div class="avoid-symbol">${a.symbol}</div>
+      <div class="avoid-reason">${a.reason}</div>
+    </div>`).join('');
+
+  document.getElementById('app').innerHTML=`
+    <div class="macro-card">
+      <div class="macro-badge">${d.macro.badge}</div>
+      <p style="font-size:var(--text-sm);color:var(--muted)">${d.macro.intro}</p>
+    </div>
+    <div class="snapshot-grid">${snapshotHTML}</div>
+    <div class="section-header"><span class="section-title">Top Intraday Opportunities</span><span class="section-sub">One Index · One FX · One Metal</span></div>
+    ${setupsHTML}
+    <div class="section-header"><span class="section-title">Confidence Ranking</span><span class="section-sub">Highest to Lowest Conviction</span></div>
+    <div class="ranking-grid">${rankingHTML}</div>
+    <div class="section-header"><span class="section-title">Contrarian Idea</span><span class="section-sub">Deserves Serious Consideration</span></div>
+    ${contrHTML}
+    <div class="section-header"><span class="section-title">Names to Actively Avoid</span><span class="section-sub">With Clear Reasoning</span></div>
+    <div class="avoid-list">${avoidHTML}</div>
+  `;
+}
+
+// ── EDITOR ──────────────────────────────────────────
+function openEdit(){
+  const d=DATA;
+  const body=document.getElementById('editBody');
+  body.innerHTML=`
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(this,'tab-general')">Obecné</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-snapshot')">Snapshot</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-s1')">Setup #1</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-s2')">Setup #2</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-s3')">Setup #3</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-contrarian')">Contrarian</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-avoid')">Avoid</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-general">
+      <p class="form-section-title">Datum & Makro</p>
+      <div class="field-group"><label>Datum</label><input id="e_date" value="${esc(d.date)}"></div>
+      <div class="field-group"><label>Makro badge</label><input id="e_macro_badge" value="${esc(d.macro?.badge||'')}"></div>
+      <div class="field-group"><label>Makro úvod (HTML povoleno)</label><textarea id="e_macro_intro">${esc(d.macro?.intro||'')}</textarea></div>
+    </div>
+
+    <div class="tab-panel" id="tab-snapshot">
+      <p class="form-section-title">Tržní snímek (5 karet)</p>
+      ${(d.snapshot||[]).map((s,i)=>`
+        <div style="padding:.75rem;background:var(--surface-2);border-radius:8px;border:1px solid var(--border)">
+          <p style="font-size:var(--text-xs);font-weight:700;color:var(--accent);margin-bottom:.5rem">${s.name}</p>
+          <div class="form-row">
+            <div class="field-group"><label>Hodnota</label><input id="sn${i}_value" value="${esc(s.value)}"></div>
+            <div class="field-group"><label>Změna</label><input id="sn${i}_change" value="${esc(s.change)}"></div>
+          </div>
+          <div class="form-row">
+            <div class="field-group"><label>Směr (up/down)</label>
+              <select id="sn${i}_dir"><option value="up"${s.dir==='up'?' selected':''}>▲ up</option><option value="down"${s.dir==='down'?' selected':''}>▼ down</option></select>
+            </div>
+            <div class="field-group"><label>Poznámka</label><input id="sn${i}_note" value="${esc(s.note)}"></div>
+          </div>
+        </div>`).join('')}
+    </div>
+
+    ${(d.setups||[]).map((s,i)=>`
+    <div class="tab-panel" id="tab-s${i+1}">
+      <p class="form-section-title">Setup #${i+1}: ${s.symbol}</p>
+      <div class="form-row">
+        <div class="field-group"><label>Symbol</label><input id="s${i}_symbol" value="${esc(s.symbol)}"></div>
+        <div class="field-group"><label>Název</label><input id="s${i}_name" value="${esc(s.name)}"></div>
+      </div>
+      <div class="form-row">
+        <div class="field-group"><label>Conviction label</label><input id="s${i}_conv" value="${esc(s.conviction)}"></div>
+        <div class="field-group"><label>Conviction % (0–100)</label><input type="number" id="s${i}_pct" value="${s.conviction_pct}" min="0" max="100"></div>
+      </div>
+      <div class="field-group"><label>Odůvodnění</label><textarea id="s${i}_rationale">${esc(s.rationale)}</textarea></div>
+      <div class="form-row">
+        <div class="field-group"><label>Entry Zone</label><input id="s${i}_entry" value="${esc(s.entry)}"></div>
+        <div class="field-group"><label>Entry poznámka</label><input id="s${i}_entry_note" value="${esc(s.entry_note)}"></div>
+      </div>
+      <div class="form-row">
+        <div class="field-group"><label>Take Profit</label><input id="s${i}_target" value="${esc(s.target)}"></div>
+        <div class="field-group"><label>TP poznámka</label><input id="s${i}_target_note" value="${esc(s.target_note)}"></div>
+      </div>
+      <div class="form-row">
+        <div class="field-group"><label>Stop Loss</label><input id="s${i}_stop" value="${esc(s.stop)}"></div>
+        <div class="field-group"><label>SL poznámka</label><input id="s${i}_stop_note" value="${esc(s.stop_note)}"></div>
+      </div>
+      <div class="field-group"><label>Hedge instrukce</label><textarea id="s${i}_hedge">${esc(s.hedge)}</textarea></div>
+    </div>`).join('')}
+
+    <div class="tab-panel" id="tab-contrarian">
+      <p class="form-section-title">Contrarian Idea</p>
+      ${['symbol','entry','stop','target','rr'].map(k=>`
+        <div class="field-group"><label>${k}</label><input id="ct_${k}" value="${esc(d.contrarian?.[k]||'')}"></div>`).join('')}
+      <div class="field-group"><label>Popis</label><textarea id="ct_body">${esc(d.contrarian?.body||'')}</textarea></div>
+      <div class="field-group"><label>Varování</label><textarea id="ct_warning">${esc(d.contrarian?.warning||'')}</textarea></div>
+    </div>
+
+    <div class="tab-panel" id="tab-avoid">
+      <p class="form-section-title">Names to Avoid (${(d.avoid||[]).length} položek)</p>
+      ${(d.avoid||[]).map((a,i)=>`
+        <div style="padding:.75rem;background:var(--surface-2);border-radius:8px;border:1px solid var(--border)">
+          <div class="field-group"><label>Symbol / název</label><input id="av${i}_sym" value="${esc(a.symbol)}"></div>
+          <div class="field-group"><label>Důvod</label><textarea id="av${i}_reason" style="min-height:60px">${esc(a.reason)}</textarea></div>
+        </div>`).join('')}
+    </div>
+  `;
+  document.getElementById('editModal').classList.add('open');
+}
+
+function switchTab(btn,id){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+function collectEdits(){
+  const d=JSON.parse(JSON.stringify(DATA));
+  d.date=val('e_date');
+  d.macro={badge:val('e_macro_badge'),intro:val('e_macro_intro')};
+  (d.snapshot||[]).forEach((_,i)=>{
+    d.snapshot[i].value=val(`sn${i}_value`);
+    d.snapshot[i].change=val(`sn${i}_change`);
+    d.snapshot[i].dir=val(`sn${i}_dir`);
+    d.snapshot[i].note=val(`sn${i}_note`);
+  });
+  (d.setups||[]).forEach((_,i)=>{
+    d.setups[i].symbol=val(`s${i}_symbol`);
+    d.setups[i].name=val(`s${i}_name`);
+    d.setups[i].conviction=val(`s${i}_conv`);
+    d.setups[i].conviction_pct=parseInt(val(`s${i}_pct`)||'0',10);
+    d.setups[i].rationale=val(`s${i}_rationale`);
+    d.setups[i].entry=val(`s${i}_entry`);d.setups[i].entry_note=val(`s${i}_entry_note`);
+    d.setups[i].target=val(`s${i}_target`);d.setups[i].target_note=val(`s${i}_target_note`);
+    d.setups[i].stop=val(`s${i}_stop`);d.setups[i].stop_note=val(`s${i}_stop_note`);
+    d.setups[i].hedge=val(`s${i}_hedge`);
+  });
+  if(d.contrarian){
+    ['symbol','entry','stop','target','rr','body','warning'].forEach(k=>{
+      const el=document.getElementById(`ct_${k}`);if(el) d.contrarian[k]=el.value;
+    });
+  }
+  (d.avoid||[]).forEach((_,i)=>{
+    d.avoid[i].symbol=val(`av${i}_sym`);
+    d.avoid[i].reason=val(`av${i}_reason`);
+  });
+  return d;
+}
+
+function applyEdits(){
+  DATA=collectEdits();
+  render();
+  closeEdit();
+}
+
+function downloadJSON(){
+  const d=collectEdits();
+  const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='data.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function closeEdit(){document.getElementById('editModal').classList.remove('open')}
+function val(id){const el=document.getElementById(id);return el?el.value:''}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+// Close modal on backdrop click
+document.getElementById('editModal').addEventListener('click',function(e){if(e.target===this)closeEdit()});
+
+// Init
+loadData();
+</script>
+</body>
+</html>

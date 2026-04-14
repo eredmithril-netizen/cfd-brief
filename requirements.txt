@@ -1,0 +1,5 @@
+openai>=1.30.0
+requests>=2.32.0
+pytz>=2024.1
+feedparser>=6.0.11
+fredapi>=0.5.1
