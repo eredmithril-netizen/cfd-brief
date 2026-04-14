@@ -1,3 +1,152 @@
+
+import os, requests, json, logging
+from datetime import datetime
+
+# ─── IG LIVE API ───────────────────────────────────────────────────────────────
+
+IG_API_KEY    = os.environ.get("IG_API_KEY", "")
+IG_USERNAME   = os.environ.get("IG_USERNAME", "")
+IG_PASSWORD   = os.environ.get("IG_PASSWORD", "")
+IG_ACCOUNT_ID = os.environ.get("IG_ACCOUNT_ID", "")
+IG_BASE_URL   = "https://api.ig.com/gateway/deal"
+
+# IG EPIC codes for instruments visible in the screenshots
+IG_EPICS = {
+    # Indices
+    "US500":    "IX.D.SPTRD.IFS.IP",       # US 500
+    "USTECH":   "IX.D.NASDAQ.IFS.IP",      # US Tech 100
+    "DE40":     "IX.D.DAX.IFS.IP",         # Germany 40
+    "FTSE":     "IX.D.FTSE.IFS.IP",        # FTSE 100
+    "EU50":     "IX.D.STXE.IFS.IP",        # EU Stocks 50
+    "FR40":     "IX.D.CAC.IFS.IP",         # France 40
+    "JP225":    "IX.D.NIKKEI.IFS.IP",      # Japan 225
+    "RUS2K":    "IX.D.RUSSELL.IFS.IP",     # US Russell 2000
+
+    # FX
+    "EURUSD":   "CS.D.EURUSD.MINI.IP",
+    "GBPUSD":   "CS.D.GBPUSD.MINI.IP",
+    "USDJPY":   "CS.D.USDJPY.MINI.IP",
+    "AUDUSD":   "CS.D.AUDUSD.MINI.IP",
+    "USDCHF":   "CS.D.USDCHF.MINI.IP",
+    "EURGBP":   "CS.D.EURGBP.MINI.IP",
+    "GBPJPY":   "CS.D.GBPJPY.MINI.IP",
+    "CADJPY":   "CS.D.CADJPY.MINI.IP",
+    "GBPCAD":   "CS.D.GBPCAD.MINI.IP",
+    "CHFJPY":   "CS.D.CHFJPY.MINI.IP",
+    "EURCAD":   "CS.D.EURCAD.MINI.IP",
+
+    # Metals
+    "XAUUSD":   "CS.D.CFDGC.CFM.IP",      # Gold Spot
+    "XAGUSD":   "CS.D.CFDSI.CFM.IP",      # Silver Spot
+    "XPDUSD":   "CS.D.CFDPA.CFM.IP",      # Palladium
+    "XPTUSD":   "CS.D.CFDPT.CFM.IP",      # Platinum
+
+    # Energy & Commodities
+    "USOIL":    "CF.D.CRUDEOIL.OCT.IP",   # WTI Crude Oil
+    "COPPER":   "CF.D.COPPER.DEC.IP",     # Copper
+    "ALUMINIUM":"MT.D.ALUMINIUM.MPLY.IP", # Aluminium
+    "COFFEE":   "CF.D.COFFEE.DEC.IP",     # Coffee NY
+    "COCOA":    "CF.D.COCOA.DEC.IP",      # Cocoa NY
+}
+
+def ig_login():
+    """Login to IG LIVE API, return session headers."""
+    if not all([IG_API_KEY, IG_USERNAME, IG_PASSWORD]):
+        logging.warning("IG API credentials not set")
+        return None
+    headers = {
+        "Content-Type": "application/json; charset=UTF-8",
+        "Accept": "application/json; charset=UTF-8",
+        "X-IG-API-KEY": IG_API_KEY,
+        "Version": "3",
+    }
+    payload = {
+        "identifier": IG_USERNAME,
+        "password": IG_PASSWORD,
+        "encryptedPassword": False,
+    }
+    try:
+        r = requests.post(f"{IG_BASE_URL}/session", headers=headers, json=payload, timeout=15)
+        r.raise_for_status()
+        cst   = r.headers.get("CST")
+        token = r.headers.get("X-SECURITY-TOKEN")
+        account_id = IG_ACCOUNT_ID or r.json().get("accountId", "")
+        if not cst or not token:
+            logging.error("IG login: missing CST or X-SECURITY-TOKEN")
+            return None
+        session_headers = {
+            "X-IG-API-KEY": IG_API_KEY,
+            "CST": cst,
+            "X-SECURITY-TOKEN": token,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "IG-ACCOUNT-ID": account_id,
+        }
+        logging.info("IG login successful")
+        return session_headers
+    except Exception as e:
+        logging.error(f"IG login failed: {e}")
+        return None
+
+
+def ig_fetch_price(session_headers, epic):
+    """Fetch current BID/ASK/MID for a single IG epic."""
+    try:
+        url = f"{IG_BASE_URL}/markets/{epic}"
+        r = requests.get(url, headers={**session_headers, "Version": "1"}, timeout=10)
+        if r.status_code == 200:
+            data = r.json()
+            snap = data.get("snapshot", {})
+            bid  = snap.get("bid")
+            ask  = snap.get("offer")
+            net  = snap.get("netChange", 0)
+            pct  = snap.get("percentageChange", 0)
+            high = snap.get("high")
+            low  = snap.get("low")
+            if bid and ask:
+                mid = round((float(bid) + float(ask)) / 2, 6)
+                return {
+                    "price": mid,
+                    "bid":   float(bid),
+                    "ask":   float(ask),
+                    "change": float(net or 0),
+                    "change_pct": float(pct or 0),
+                    "high": float(high) if high else None,
+                    "low":  float(low) if low else None,
+                    "source": "IG_LIVE",
+                }
+    except Exception as e:
+        logging.warning(f"IG price fetch failed for {epic}: {e}")
+    return None
+
+
+def fetch_ig_prices():
+    """Fetch all instrument prices from IG LIVE API.
+    Returns dict: symbol -> price_data"""
+    session = ig_login()
+    if not session:
+        logging.warning("IG session failed, falling back to public APIs")
+        return {}
+
+    results = {}
+    for symbol, epic in IG_EPICS.items():
+        data = ig_fetch_price(session, epic)
+        if data:
+            results[symbol] = data
+            logging.info(f"  IG {symbol}: {data['price']} ({data['change_pct']:+.2f}%)")
+        else:
+            logging.warning(f"  IG {symbol} ({epic}): no data")
+
+    # Logout
+    try:
+        requests.delete(f"{IG_BASE_URL}/session", headers=session, timeout=5)
+    except:
+        pass
+
+    logging.info(f"IG prices fetched: {len(results)}/{len(IG_EPICS)} instruments")
+    return results
+
+# ─── END IG LIVE API ───────────────────────────────────────────────────────────
 #!/usr/bin/env python3
 """
 CFD Intraday Brief — Multi-Source Auto-Generator v2.0
@@ -802,6 +951,22 @@ def call_openai(prompt: str) -> Dict:
 #  9. MAIN
 # ═══════════════════════════════════════════════════════════════
 def main():
+
+    # ── PRIMARY: IG LIVE API ──────────────────────────────────────
+    ig_prices = {}
+    try:
+        ig_prices = fetch_ig_prices()
+        if ig_prices:
+            logging.info(f"IG LIVE API: {len(ig_prices)} prices loaded as primary source")
+    except Exception as e:
+        logging.warning(f"IG fetch error: {e}")
+
+    def get_price(symbol, fallback=None):
+        """Get price preferring IG LIVE, fallback to public API value."""
+        if symbol in ig_prices:
+            return ig_prices[symbol]
+        return fallback
+
     now = datetime.now(CET)
     log.info(f"\n{'━'*55}")
     log.info(f"  CFD Brief Generator — {now.strftime('%Y-%m-%d %H:%M %Z')}")

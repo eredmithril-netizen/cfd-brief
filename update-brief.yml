@@ -1,0 +1,58 @@
+name: Update CFD Intraday Brief
+
+on:
+  schedule:
+    - cron: '50 6 * * 1-5'    # 08:00 CEST (Po–Pá)
+    - cron: '50 9 * * 1-5'    # 12:00 CEST
+    - cron: '50 12 * * 1-5'   # 15:00 CEST
+  workflow_dispatch:            # Ruční spuštění kdykoliv
+
+jobs:
+  update-brief:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate brief
+        run: python generate_brief.py
+        env:
+          # ── IG LIVE API (primární zdroj cen) ─────────────────
+          IG_API_KEY:           ${{ secrets.IG_API_KEY }}
+          IG_USERNAME:          ${{ secrets.IG_USERNAME }}
+          IG_PASSWORD:          ${{ secrets.IG_PASSWORD }}
+          IG_ACCOUNT_ID:        ${{ secrets.IG_ACCOUNT_ID }}
+
+          # ── Povinné ──────────────────────────────────────────
+          OPENAI_API_KEY:       ${{ secrets.OPENAI_API_KEY }}
+
+          # ── Cenová data (zadejte alespoň 1–2) ───────────────
+          TWELVEDATA_API_KEY:   ${{ secrets.TWELVEDATA_API_KEY }}
+          FINNHUB_API_KEY:      ${{ secrets.FINNHUB_API_KEY }}
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
+          POLYGON_API_KEY:      ${{ secrets.POLYGON_API_KEY }}
+          FMP_API_KEY:          ${{ secrets.FMP_API_KEY }}
+
+          # ── Makrodata ────────────────────────────────────────
+          FRED_API_KEY:         ${{ secrets.FRED_API_KEY }}
+
+          # ── Zprávy ───────────────────────────────────────────
+          NEWSAPI_KEY:          ${{ secrets.NEWSAPI_KEY }}
+
+      - name: Commit updated data.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "🤖 Auto-update CFD brief [skip ci]"
+          file_pattern: data.json
+          commit_user_name: "CFD Brief Bot"
+          commit_user_email: "bot@cfd-brief.local"

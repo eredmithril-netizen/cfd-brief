@@ -3,3 +3,5 @@ requests>=2.32.0
 pytz>=2024.1
 feedparser>=6.0.11
 fredapi>=0.5.1
+
+trading-ig>=0.0.14
