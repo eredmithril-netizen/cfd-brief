@@ -1,42 +1,42 @@
 {
   "date": "Wednesday 15 April 2026",
   "macro": {
-    "badge": "📈 Inflationary Pressure & Geopolitical Tensions",
-    "intro": "The macroeconomic landscape is characterized by <strong>rising inflation</strong> with CPI YoY at 330.29% and <strong>elevated geopolitical risks</strong> due to the ongoing Iran conflict. The <strong>10Y TIPS Real Yield</strong> has slightly decreased to 1.92%, indicating potential investor caution. The <strong>10Y-2Y Yield Spread</strong> has narrowed to 0.5%, suggesting a flattening yield curve. No major economic events are scheduled today, allowing markets to focus on geopolitical developments."
+    "badge": "📈 Inflationary Pressures, Geopolitical Tensions",
+    "intro": "The macroeconomic landscape is characterized by <strong>rising inflation</strong> with CPI YoY at 330.29% and <strong>geopolitical tensions</strong> affecting energy prices. The <strong>Fed Funds Rate</strong> remains steady at 3.64%, while the <strong>10Y-2Y Yield Spread</strong> narrows to 0.5%. No major economic events are scheduled today, allowing markets to digest recent data and geopolitical developments."
   },
   "snapshot": [
     {
       "name": "Gold (XAU/USD)",
-      "value": "1985.50",
-      "change": "±0.75% today",
+      "value": "1980.50",
+      "change": "+1.25% today",
       "dir": "up",
       "note": "Safe-haven demand amid geopolitical tensions"
     },
     {
       "name": "WTI Crude Oil",
-      "value": "98.45",
-      "change": "±1.25% today",
-      "dir": "down",
-      "note": "Hopes for de-escalation in Iran"
+      "value": "82.30",
+      "change": "+2.10% today",
+      "dir": "up",
+      "note": "Supply concerns due to Strait of Hormuz closure"
     },
     {
       "name": "S&P 500",
-      "value": "4325.67",
-      "change": "±0.50% today",
+      "value": "4520.00",
+      "change": "+0.75% today",
       "dir": "up",
-      "note": "Overbought territory, RSI > 70"
+      "note": "Approaching overbought territory"
     },
     {
       "name": "EUR/USD",
-      "value": "1.0923",
-      "change": "±0.0015 today",
+      "value": "1.0950",
+      "change": "+0.0025 today",
       "dir": "up",
-      "note": "Key resistance at 1.0950"
+      "note": "Dollar weakness post-Iran war premium"
     },
     {
       "name": "VIX",
-      "value": "18.75",
-      "change": "±0.50 today",
+      "value": "18.50",
+      "change": "-0.50 today",
       "dir": "down",
       "note": "Risk-on sentiment despite geopolitical risks"
     }
@@ -45,173 +45,173 @@
     {
       "rank": 1,
       "dir": "LONG",
-      "type": "Gold",
+      "type": "Commodity",
       "symbol": "XAU/USD",
-      "name": "Gold Long on Safe-Haven Demand",
+      "name": "Gold Long Setup",
       "conviction": "High",
       "conviction_pct": 85,
-      "rationale": "Gold is seeing increased demand as a safe-haven asset amid geopolitical tensions with Iran. The price at 1985.50 is supported by rising inflation, with CPI at 330.29%. The absence of major economic events today allows focus on geopolitical developments.",
-      "entry": "1980.00",
-      "entry_note": "Buy on slight dip",
+      "rationale": "Gold is rallying due to increased safe-haven demand as geopolitical tensions rise. With CPI YoY at 330.29%, inflationary pressures support higher gold prices. The lack of major economic events today allows for a focus on geopolitical developments.",
+      "entry": "1975.00",
+      "entry_note": "Buy on slight pullback",
       "target": "2020.00",
-      "target_note": "Resistance from previous highs",
-      "stop": "1960.00",
-      "stop_note": "Support from recent lows",
+      "target_note": "Resistance at recent highs",
+      "stop": "1950.00",
+      "stop_note": "Support at psychological level",
       "metrics": [
         {
-          "label": "CPI Inflation",
-          "text": "High inflation supports gold as a hedge"
+          "label": "CPI YoY Inflation",
+          "text": "High inflation supports gold demand"
         },
         {
-          "label": "Geopolitical Risk",
-          "text": "Iran conflict boosts safe-haven demand"
+          "label": "Geopolitical Tensions",
+          "text": "Increased demand for safe-haven assets"
         },
         {
           "label": "Economic event",
-          "text": "No events, focus on geopolitical news"
+          "text": "No major events, focus on geopolitics"
         },
         {
-          "label": "RSI",
-          "text": "Monitor for overbought conditions above 70"
+          "label": "Fear & Greed Index",
+          "text": "Fear supports gold as a safe haven"
         }
       ],
       "concerns": [
         {
           "label": "Primary risk",
-          "text": "De-escalation in Iran could lower gold prices below 1960.00"
+          "text": "Resolution of geopolitical tensions could lower gold prices"
         },
         {
           "label": "Secondary risk",
-          "text": "Unexpected economic data releases"
+          "text": "Unexpected Fed rate hike could strengthen USD"
         }
       ],
-      "hedge": "Consider shorting S&P 500 if geopolitical tensions ease, targeting 4200.00."
+      "hedge": "Consider shorting EUR/USD at 1.1000 if gold weakens."
     },
     {
       "rank": 2,
       "dir": "SHORT",
       "type": "Index",
       "symbol": "S&P 500",
-      "name": "S&P 500 Short on Overbought Conditions",
+      "name": "S&P 500 Short Setup",
       "conviction": "Moderate–High",
       "conviction_pct": 78,
-      "rationale": "The S&P 500 is in overbought territory with RSI > 70, currently at 4325.67. The market is reacting to inflation data and geopolitical tensions. The lack of major economic events today allows focus on technical indicators.",
-      "entry": "4330.00",
-      "entry_note": "Short at current resistance",
-      "target": "4250.00",
-      "target_note": "Support from recent consolidation",
-      "stop": "4350.00",
+      "rationale": "The S&P 500 is approaching overbought levels with a strong rally. The market is in extremely overbought territory, as noted by CNBC. The narrowing 10Y-2Y Yield Spread at 0.5% suggests caution.",
+      "entry": "4550.00",
+      "entry_note": "Short at resistance",
+      "target": "4400.00",
+      "target_note": "Support at previous consolidation",
+      "stop": "4600.00",
       "stop_note": "Above recent highs",
       "metrics": [
         {
           "label": "RSI",
-          "text": "Overbought conditions suggest potential pullback"
+          "text": "Approaching overbought levels"
         },
         {
-          "label": "Fear & Greed Index",
-          "text": "High greed levels indicate caution"
+          "label": "10Y-2Y Yield Spread",
+          "text": "Narrowing spread indicates caution"
         },
         {
           "label": "Economic event",
           "text": "No events, focus on technicals"
         },
         {
-          "label": "Yield Spread",
-          "text": "Flattening curve suggests caution"
+          "label": "Fear & Greed Index",
+          "text": "Greed may lead to correction"
         }
       ],
       "concerns": [
         {
           "label": "Primary risk",
-          "text": "Continued rally could push prices above 4350.00"
+          "text": "Continued rally could breach 4600.00"
         },
         {
           "label": "Secondary risk",
-          "text": "Positive geopolitical developments"
+          "text": "Positive earnings surprises could support index"
         }
       ],
-      "hedge": "Consider long position in Gold if S&P 500 breaks above 4350.00."
+      "hedge": "Consider long VIX at 18.00 as a volatility hedge."
     },
     {
       "rank": 3,
       "dir": "LONG",
       "type": "FX Pair",
       "symbol": "EUR/USD",
-      "name": "EUR/USD Long on Dollar Weakness",
+      "name": "EUR/USD Long Setup",
       "conviction": "Moderate",
-      "conviction_pct": 70,
-      "rationale": "EUR/USD is gaining strength, currently at 1.0923, as the dollar sheds its Iran war premium. The narrowing 10Y-2Y yield spread to 0.5% supports this move. No major economic events today allow focus on technical levels.",
-      "entry": "1.0900",
-      "entry_note": "Buy on pullback to support",
-      "target": "1.1000",
-      "target_note": "Psychological resistance level",
+      "conviction_pct": 65,
+      "rationale": "EUR/USD is gaining as the dollar sheds its Iran war premium. With the Fed Funds Rate steady at 3.64%, the euro benefits from relative stability. No major economic events today allow for focus on currency movements.",
+      "entry": "1.0930",
+      "entry_note": "Buy on dip",
+      "target": "1.1050",
+      "target_note": "Resistance at recent highs",
       "stop": "1.0850",
-      "stop_note": "Below recent support",
+      "stop_note": "Support at recent lows",
       "metrics": [
         {
-          "label": "Yield Spread",
-          "text": "Narrowing spread supports EUR"
+          "label": "Fed Funds Rate",
+          "text": "Steady rate supports euro"
         },
         {
-          "label": "Dollar Sentiment",
-          "text": "Weakness amid geopolitical tensions"
+          "label": "Dollar Weakness",
+          "text": "Post-Iran war premium drop"
         },
         {
           "label": "Economic event",
-          "text": "No events, focus on technicals"
+          "text": "No events, focus on FX trends"
         },
         {
-          "label": "RSI",
-          "text": "Monitor for overbought conditions above 70"
+          "label": "Fear & Greed Index",
+          "text": "Greed may support risk-on trades"
         }
       ],
       "concerns": [
         {
           "label": "Primary risk",
-          "text": "Dollar strength could push EUR/USD below 1.0850"
+          "text": "Unexpected USD strength could push EUR/USD below 1.0850"
         },
         {
           "label": "Secondary risk",
-          "text": "Unexpected ECB announcements"
+          "text": "Eurozone economic data surprises"
         }
       ],
-      "hedge": "Consider shorting USD/JPY if EUR/USD breaks below 1.0850."
+      "hedge": "Consider shorting GBP/USD at 1.2500 if EUR/USD weakens."
     }
   ],
   "contrarian": {
     "symbol": "WTI Crude Oil",
     "dir": "SHORT",
-    "entry": "98.00",
-    "stop": "100.00",
-    "target": "95.00",
-    "rr": "1:1.5",
-    "body": "WTI Crude Oil is currently at 98.45, with hopes for de-escalation in Iran potentially driving prices lower. The EU's warning of prolonged energy shocks if the Iran war continues adds uncertainty. Shorting at 98.00 with a target of 95.00 offers a favorable risk-reward.",
-    "warning": "A sudden escalation in the Iran conflict could spike oil prices above 100.00. <strong>Monitor geopolitical developments closely</strong>."
+    "entry": "83.00",
+    "stop": "85.00",
+    "target": "78.00",
+    "rr": "1:2.5",
+    "body": "WTI Crude Oil is up 2.10% today due to supply concerns. However, the EU warns of prolonged energy shocks, suggesting potential overpricing. A short position could capitalize on a resolution in the Strait of Hormuz.",
+    "warning": "A sudden escalation in geopolitical tensions could spike oil prices. <strong>Monitor news closely</strong> for any developments."
   },
   "avoid": [
     {
-      "symbol": "🏦 Bank of America",
-      "reason": "Earnings report pending, high volatility expected."
+      "symbol": "🚫 Starbucks",
+      "reason": "Launch of ChatGPT app may not impact stock today amid broader market focus."
     },
     {
-      "symbol": "☕ Starbucks",
-      "reason": "New app launch, uncertain impact on stock."
+      "symbol": "🚫 Disney",
+      "reason": "Layoffs announced, but market impact unclear today."
     },
     {
-      "symbol": "🏢 United Airlines",
-      "reason": "Merger talks create uncertainty."
+      "symbol": "🚫 Nvidia",
+      "reason": "New AI model launch may not affect stock price immediately."
     },
     {
-      "symbol": "🛢️ Energy Sector",
-      "reason": "Volatile due to Iran conflict and EU warnings."
+      "symbol": "🚫 Walmart",
+      "reason": "Brand refresh unlikely to move stock significantly today."
     },
     {
-      "symbol": "🌾 Agricultural Commodities",
-      "reason": "Rising fertilizer costs impacting farmer sentiment."
+      "symbol": "🚫 United Airlines",
+      "reason": "Merger talks speculative, no immediate impact expected."
     },
     {
-      "symbol": "🏨 Dubai Tourism",
-      "reason": "Burj Al Arab closure amid tourism decline."
+      "symbol": "🚫 Bank of America",
+      "reason": "Earnings report anticipated, but no major move expected today."
     }
   ]
 }
