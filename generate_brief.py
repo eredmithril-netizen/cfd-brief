@@ -8,7 +8,7 @@ IG_API_KEY    = os.environ.get("IG_API_KEY", "")
 IG_USERNAME   = os.environ.get("IG_USERNAME", "")
 IG_PASSWORD   = os.environ.get("IG_PASSWORD", "")
 IG_ACCOUNT_ID = os.environ.get("IG_ACCOUNT_ID", "")
-IG_BASE_URL   = "https://api.ig.com/gateway/deal"
+IG_BASE_URL   = "https://demo-api.ig.com/gateway/deal"
 
 # IG EPIC codes for instruments visible in the screenshots
 IG_EPICS = {
