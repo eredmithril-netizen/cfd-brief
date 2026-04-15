@@ -58,7 +58,7 @@ def ig_login():
         "Content-Type": "application/json; charset=UTF-8",
         "Accept": "application/json; charset=UTF-8",
         "X-IG-API-KEY": IG_API_KEY,
-        "Version": "3",
+        "Version": "2",
     }
     payload = {
         "identifier": IG_USERNAME,
