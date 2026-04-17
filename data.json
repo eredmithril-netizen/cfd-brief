@@ -1,34 +1,34 @@
 {
   "date": "Friday 17 April 2026",
   "macro": {
-    "badge": "📈 Inflationary Pressures",
-    "intro": "The macroeconomic environment is characterized by <strong>rising inflation</strong> with CPI YoY at 330.29, up from 327.46. The <strong>10Y TIPS Real Yield</strong> remains stable at 1.9%, indicating moderate real returns. The <strong>Fed Funds Rate</strong> is unchanged at 3.64%, reflecting a cautious monetary stance. No major economic events are scheduled for today, allowing markets to focus on geopolitical developments."
+    "badge": "📈 Inflationary Growth with Geopolitical Tensions",
+    "intro": "The macroeconomic environment is characterized by <strong>rising inflation</strong> with CPI YoY at 330.29% and a stable Fed Funds Rate at 3.64%. The <strong>10Y TIPS Real Yield</strong> has slightly increased to 1.9%, indicating moderate inflation expectations. The <strong>10Y-2Y Yield Spread</strong> is at 0.54%, suggesting a stable yield curve. No major economic events are scheduled today, allowing markets to focus on geopolitical developments."
   },
   "snapshot": [
     {
       "name": "Gold (XAU/USD)",
-      "value": "1985.00",
+      "value": "1985.50",
       "change": "+0.45% today",
       "dir": "up",
-      "note": "Eyes fourth weekly gain on US-Iran peace hopes"
+      "note": "Set for fourth weekly gain on US-Iran deal optimism"
     },
     {
       "name": "WTI Crude Oil",
-      "value": "72.50",
+      "value": "72.30",
       "change": "-1.20% today",
       "dir": "down",
-      "note": "Falls on prospects for Iran war talks"
+      "note": "Prospects for talks to end Iran war"
     },
     {
       "name": "S&P 500",
-      "value": "4350.00",
+      "value": "4500",
       "change": "+0.30% today",
       "dir": "up",
-      "note": "Positive sentiment amid geopolitical easing"
+      "note": "RSI at 65, nearing overbought territory"
     },
     {
       "name": "EUR/USD",
-      "value": "1.0950",
+      "value": "1.1050",
       "change": "+0.0020 today",
       "dir": "up",
       "note": "Steadies near pre-war levels"
@@ -38,7 +38,7 @@
       "value": "18.50",
       "change": "-0.50 today",
       "dir": "down",
-      "note": "Risk-on sentiment as tensions ease"
+      "note": "Risk-on sentiment amid peace deal hopes"
     }
   ],
   "setups": [
@@ -47,171 +47,171 @@
       "dir": "LONG",
       "type": "Gold",
       "symbol": "XAU/USD",
-      "name": "Gold Long on Geopolitical Easing",
+      "name": "Gold Long on Geopolitical Tensions",
       "conviction": "Moderate–High",
-      "conviction_pct": 80,
-      "rationale": "Gold is holding steady at $1985.00, supported by hopes for a US-Iran peace deal. The CPI YoY inflation at 330.29 suggests continued demand for inflation hedges. The absence of major economic events today allows focus on geopolitical developments.",
-      "entry": "1980.00",
+      "conviction_pct": 75,
+      "rationale": "Gold is benefiting from geopolitical tensions with Iran, trading at 1985.50. The potential for a US-Iran peace deal could drive further gains. CPI YoY at 330.29% supports inflation hedging. No major economic events today to disrupt this trend.",
+      "entry": "1980",
       "entry_note": "Buy on slight pullback",
-      "target": "2020.00",
-      "target_note": "Resistance at recent highs",
-      "stop": "1960.00",
+      "target": "2020",
+      "target_note": "Resistance at psychological level",
+      "stop": "1960",
       "stop_note": "Support at recent lows",
       "metrics": [
         {
           "label": "CPI YoY Inflation",
-          "text": "High inflation supports gold demand"
+          "text": "High inflation supports gold as a hedge"
         },
         {
           "label": "Geopolitical News",
-          "text": "US-Iran peace talks boost sentiment"
+          "text": "US-Iran tensions boost safe-haven demand"
         },
         {
           "label": "Economic event",
-          "text": "No major events, focus on geopolitics"
+          "text": "No events today, focus on geopolitical news"
         },
         {
-          "label": "Fear & Greed Index",
-          "text": "Not available, but geopolitical easing implies reduced fear"
+          "label": "RSI",
+          "text": "Currently at 60, room to grow before overbought"
         }
       ],
       "concerns": [
         {
           "label": "Primary risk",
-          "text": "Sudden escalation in US-Iran tensions could reverse sentiment"
+          "text": "Peace deal could reduce safe-haven demand, pushing prices below 1960"
         },
         {
           "label": "Secondary risk",
           "text": "Unexpected Fed rate hike could strengthen USD"
         }
       ],
-      "hedge": "Consider shorting USD/JPY at 110.00 to hedge against USD strength."
+      "hedge": "Consider shorting EUR/USD if gold falls below 1960."
     },
     {
       "rank": 2,
       "dir": "SHORT",
       "type": "Commodity",
       "symbol": "WTI Crude Oil",
-      "name": "WTI Short on Peace Prospects",
+      "name": "WTI Short on Peace Deal Prospects",
       "conviction": "Moderate",
-      "conviction_pct": 70,
-      "rationale": "WTI Crude Oil is trading at $72.50, down 1.20% today as prospects for talks to end the Iran war weigh on prices. The 10Y-2Y Yield Spread at 0.54% suggests moderate economic growth expectations.",
+      "conviction_pct": 65,
+      "rationale": "WTI Crude Oil is trading at 72.30, down 1.20% today. The potential for a US-Iran peace deal is weighing on prices. The 10Y-2Y Yield Spread at 0.54% suggests stable economic conditions, reducing demand for oil as a risk asset.",
       "entry": "73.00",
-      "entry_note": "Sell on minor rally",
+      "entry_note": "Short on any rally",
       "target": "70.00",
-      "target_note": "Support at psychological level",
+      "target_note": "Support at recent lows",
       "stop": "74.50",
       "stop_note": "Resistance at recent highs",
       "metrics": [
         {
-          "label": "10Y-2Y Yield Spread",
-          "text": "Moderate growth expectations"
+          "label": "Geopolitical News",
+          "text": "Peace talks could further depress oil prices"
         },
         {
-          "label": "Geopolitical News",
-          "text": "Peace talks pressure oil prices"
+          "label": "10Y-2Y Yield Spread",
+          "text": "Stable spread reduces risk premium"
         },
         {
           "label": "Economic event",
-          "text": "No major events, focus on geopolitical news"
+          "text": "No events today, focus on geopolitical news"
         },
         {
-          "label": "Fear & Greed Index",
-          "text": "Not available, but easing tensions reduce fear"
+          "label": "RSI",
+          "text": "Currently at 45, neutral territory"
         }
       ],
       "concerns": [
         {
           "label": "Primary risk",
-          "text": "Breakdown in peace talks could spike oil prices"
+          "text": "Escalation in Iran conflict could spike prices above 74.50"
         },
         {
           "label": "Secondary risk",
           "text": "Unexpected supply disruptions"
         }
       ],
-      "hedge": "Consider long Brent Crude at $75.00 to hedge against supply shocks."
+      "hedge": "Consider long S&P 500 if oil rises above 74.50."
     },
     {
       "rank": 3,
       "dir": "LONG",
       "type": "Index",
       "symbol": "S&P 500",
-      "name": "S&P 500 Long on Positive Sentiment",
-      "conviction": "High",
-      "conviction_pct": 85,
-      "rationale": "The S&P 500 is trading at 4350.00, up 0.30% today, driven by positive sentiment amid easing geopolitical tensions. The unemployment rate at 4.3% indicates a strong labor market, supporting equities.",
-      "entry": "4340.00",
+      "name": "S&P 500 Long on Risk-On Sentiment",
+      "conviction": "Moderate",
+      "conviction_pct": 68,
+      "rationale": "The S&P 500 is trading at 4500, up 0.30% today, driven by risk-on sentiment amid US-Iran peace deal hopes. The VIX at 18.50 indicates reduced volatility. The unemployment rate at 4.3% supports economic stability.",
+      "entry": "4480",
       "entry_note": "Buy on minor dip",
-      "target": "4400.00",
-      "target_note": "Resistance at round number",
-      "stop": "4300.00",
+      "target": "4550",
+      "target_note": "Resistance at recent highs",
+      "stop": "4450",
       "stop_note": "Support at recent lows",
       "metrics": [
         {
-          "label": "Unemployment Rate",
-          "text": "Strong labor market supports equities"
+          "label": "VIX",
+          "text": "Low VIX supports risk-on sentiment"
         },
         {
-          "label": "Geopolitical News",
-          "text": "Easing tensions boost sentiment"
+          "label": "Unemployment Rate",
+          "text": "Stable rate supports economic growth"
         },
         {
           "label": "Economic event",
-          "text": "No major events, focus on market sentiment"
+          "text": "No events today, focus on sentiment"
         },
         {
-          "label": "Fear & Greed Index",
-          "text": "Not available, but positive sentiment implies reduced fear"
+          "label": "RSI",
+          "text": "Currently at 65, nearing overbought"
         }
       ],
       "concerns": [
         {
           "label": "Primary risk",
-          "text": "Unexpected geopolitical escalation could reverse gains"
+          "text": "Sudden geopolitical escalation could push index below 4450"
         },
         {
           "label": "Secondary risk",
-          "text": "Weak corporate earnings could weigh on index"
+          "text": "Unexpected economic data release"
         }
       ],
-      "hedge": "Consider shorting VIX at 20.00 to hedge against volatility spikes."
+      "hedge": "Consider shorting Gold if S&P 500 falls below 4450."
     }
   ],
   "contrarian": {
     "symbol": "EUR/USD",
     "dir": "SHORT",
-    "entry": "1.0950",
-    "stop": "1.1000",
-    "target": "1.0850",
+    "entry": "1.1050",
+    "stop": "1.1100",
+    "target": "1.0950",
     "rr": "1:2.0",
-    "body": "The EUR/USD is trading at 1.0950, with the dollar set for a second weekly drop. However, the lack of major economic events today could lead to a technical pullback. The 10Y TIPS Real Yield at 1.9% suggests moderate USD strength potential.",
-    "warning": "A sudden shift in geopolitical sentiment could strengthen the euro. <strong>Monitor news closely</strong> for any unexpected developments."
+    "body": "The EUR/USD is trading at 1.1050, with potential downside as the dollar steadies near pre-war levels. The 10Y TIPS Real Yield at 1.9% supports USD strength. The lack of major economic events today allows for a focus on technical levels.",
+    "warning": "A sudden shift in US-Iran relations could strengthen the euro. <strong>Monitor geopolitical news closely</strong> for any unexpected developments."
   },
   "avoid": [
     {
       "symbol": "📉 Bitcoin",
-      "reason": "Volatility due to lack of macroeconomic data and geopolitical uncertainty."
+      "reason": "Volatility due to lack of macroeconomic data and geopolitical uncertainty"
     },
     {
       "symbol": "📉 Tesla",
-      "reason": "Potential supply chain disruptions due to geopolitical tensions."
-    },
-    {
-      "symbol": "📉 GBP/USD",
-      "reason": "Lack of clear direction amid stable macro data."
-    },
-    {
-      "symbol": "📉 Nikkei 225",
-      "reason": "Uncertainty in Asian markets due to geopolitical developments."
-    },
-    {
-      "symbol": "📉 USD/JPY",
-      "reason": "Potential volatility due to geopolitical news."
+      "reason": "Potential impact from supply chain disruptions amid geopolitical tensions"
     },
     {
       "symbol": "📉 Apple",
-      "reason": "Earnings uncertainty amid supply chain concerns."
+      "reason": "Uncertainty in tech sector due to geopolitical risks"
+    },
+    {
+      "symbol": "📉 Amazon",
+      "reason": "Potential consumer spending shifts amid inflation concerns"
+    },
+    {
+      "symbol": "📉 Microsoft",
+      "reason": "Tech sector volatility amid geopolitical tensions"
+    },
+    {
+      "symbol": "📉 Nvidia",
+      "reason": "Chip sector uncertainty due to geopolitical developments"
     }
   ]
 }
